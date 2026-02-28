@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXRA Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="NEXRA_Admin_style.css">
+<script src="NEXRA_Admin_script.js"></script>
+<link rel="icon" type="image/x-icon" href="nexra.png">
+
+</head>
+<body>
+
+<!-- ═══════════════ LOGIN ═══════════════ -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">NEXRA</div>
+    <div class="login-sub">Admin Control Panel</div>
+    <div class="admin-badge"><span>🔐 ADMINISTRATOR ACCESS</span></div>
+    <div class="fg">
+      <label>Admin Email</label>
+      <input type="email" id="adm-email" placeholder="athayiathayi43@gmail.com" value="athayiathayi43@gmail.com">
+    </div>
+    <div class="fg">
+      <label>Password</label>
+      <input type="password" id="adm-pw" placeholder="••••••••" value="admin123">
+      <button class="pt" onclick="togglePt('adm-pw',this)">👁️</button>
+    </div>
+    <button class="btn btn-prim btn-full" onclick="adminLogin()" style="padding:1rem;font-size:0.8rem;margin-top:0.5rem;">ACCESS PANEL</button>
+    <div style="text-align:center;margin-top:1rem;font-size:0.75rem;color:var(--muted);">NEXRA Technology · Secure Admin Portal</div>
+  </div>
+</div>
+
+<!-- ═══════════════ ADMIN APP ═══════════════ -->
+<div id="admin-app">
+
+  <!-- Mobile sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+  <!-- ── SIDEBAR ── -->
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-text">NEXRA</div>
+      <div class="sidebar-tag">Admin Panel v2.0</div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="nav-section">Main</div>
+      <div class="nav-item active" onclick="gotoTab('overview',this)"><span class="ic">📊</span> Overview</div>
+      <div class="nav-item" onclick="gotoTab('customers',this)"><span class="ic">👥</span> Customers</div>
+      <div class="nav-item" onclick="gotoTab('packages',this)"><span class="ic">📦</span> Packages</div>
+      <div class="nav-item" onclick="gotoTab('orders',this)"><span class="ic">🛒</span> Orders</div>
+      <div class="nav-section">Marketing</div>
+      <div class="nav-item" onclick="gotoTab('promo',this)"><span class="ic">📣</span> Promotions</div>
+      <div class="nav-item" onclick="gotoTab('receipts',this)"><span class="ic">🧾</span> Receipts</div>
+      <div class="nav-section">Settings</div>
+      <div class="nav-item" onclick="gotoTab('accounts',this)"><span class="ic">🔑</span> Accounts</div>
+      <div class="nav-item" onclick="gotoTab('settings',this)"><span class="ic">⚙️</span> Settings</div>
+    </div>
+    <div class="sidebar-bottom">
+      <div class="admin-info">
+        <div class="admin-avatar">A</div>
+        <div>
+          <div class="admin-name">Ahamed Athayi</div>
+          <div class="admin-role">Super Admin</div>
+        </div>
+      </div>
+      <button class="btn btn-red btn-full" onclick="adminLogout()" style="margin-top:0.8rem;font-size:0.65rem;padding:0.6rem;">🔒 Sign Out</button>
+    </div>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <div class="main">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <!-- Mobile hamburger - only visible on small screens -->
+        <button class="mob-menu-btn" onclick="toggleSidebar()" title="Menu">☰</button>
+        <div class="page-title" id="current-tab-title">📊 Overview</div>
+      </div>
+      <div class="topbar-right">
+        <div class="search-bar">
+          <span style="color:var(--muted)">🔍</span>
+          <input type="text" placeholder="Search customers..." oninput="searchCustomers(this.value)">
+        </div>
+        <button class="notif-btn" onclick="toast('🔔','No new notifications.')">🔔</button>
+        <div style="font-size:0.75rem;color:var(--muted);font-family:'Space Mono',monospace;" id="clock"></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ CONTENT ═══════════════ -->
+    <div class="content">
+
+      <!-- ══ OVERVIEW ══ -->
+      <div id="tab-overview" class="tab active">
+        <div class="stat-row">
+          <div class="s-card"><div class="s-card-label">Total Customers</div><div class="s-card-value" id="stat-cust">48</div><div class="s-card-trend up">↑ +6 this month</div></div>
+          <div class="s-card"><div class="s-card-label">Revenue (Feb)</div><div class="s-card-value" style="font-size:1.4rem;" id="stat-rev">LKR 485K</div><div class="s-card-trend up">↑ +12%</div></div>
+          <div class="s-card"><div class="s-card-label">Active Orders</div><div class="s-card-value">12</div><div class="s-card-trend up">↑ 3 new today</div></div>
+          <div class="s-card"><div class="s-card-label">Pending</div><div class="s-card-value" style="color:var(--gold2);">5</div><div class="s-card-sub">Awaiting confirmation</div></div>
+          <div class="s-card"><div class="s-card-label">Packages Active</div><div class="s-card-value">6</div><div class="s-card-sub">All plans running</div></div>
+          <div class="s-card"><div class="s-card-label">Support Tickets</div><div class="s-card-value" style="color:var(--green);">0</div><div class="s-card-sub">All resolved</div></div>
+        </div>
+
+        <div class="card" style="margin-bottom:1.5rem;">
+          <div class="card-title">📈 Revenue – Last 7 Months</div>
+          <div class="mini-chart" id="rev-chart"></div>
+          <div style="display:flex;gap:2rem;margin-top:1rem;font-size:0.75rem;color:var(--muted);">
+            <span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+          <div class="card">
+            <div class="card-title">🛒 Recent Orders</div>
+            <div style="display:flex;flex-direction:column;gap:0.8rem;">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0.6rem;background:var(--glass);border-radius:8px;font-size:0.84rem;">
+                <div><div style="font-weight:700;">Pradeep Silva</div><div style="color:var(--muted);font-size:0.75rem;">Professional Package</div></div>
+                <span class="badge b-pending">Pending</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0.6rem;background:var(--glass);border-radius:8px;font-size:0.84rem;">
+                <div><div style="font-weight:700;">Nimal Fernando</div><div style="color:var(--muted);font-size:0.75rem;">POS System</div></div>
+                <span class="badge b-active">Active</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0.6rem;background:var(--glass);border-radius:8px;font-size:0.84rem;">
+                <div><div style="font-weight:700;">Ruwanthi Dias</div><div style="color:var(--muted);font-size:0.75rem;">Digital Marketing</div></div>
+                <span class="badge b-active">Active</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">⚡ Quick Actions</div>
+            <div style="display:flex;flex-direction:column;gap:0.8rem;">
+              <button class="btn btn-prim" onclick="gotoTab('customers',document.querySelector('[onclick*=customers]'))">👥 Add New Customer</button>
+              <button class="btn btn-out" onclick="gotoTab('packages',document.querySelector('[onclick*=packages]'))">📦 Manage Packages</button>
+              <button class="btn btn-out" onclick="gotoTab('promo',document.querySelector('[onclick*=promo]'))">📣 Send Promotion</button>
+              <button class="btn btn-ghost" onclick="gotoTab('receipts',document.querySelector('[onclick*=receipts]'))">🧾 Generate Receipt</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ CUSTOMERS ══ -->
+      <div id="tab-customers" class="tab">
+        <div class="sh">
+          <div class="sh-title">👥 Customer Management</div>
+          <div class="sh-actions">
+            <button class="btn btn-prim btn-sm" onclick="openModal('add-customer-modal')">+ Add Customer</button>
+            <button class="btn btn-out btn-sm" onclick="exportCustomers()">📤 Export</button>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Company</th><th>Service</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="cust-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══ PACKAGES ══ -->
+      <div id="tab-packages" class="tab">
+        <div class="sh">
+          <div class="sh-title">📦 Package Management</div>
+          <div class="sh-actions">
+            <button class="btn btn-prim btn-sm" onclick="openModal('add-pkg-modal')">+ Add Package</button>
+          </div>
+        </div>
+        <div class="pkg-grid" id="pkg-grid"></div>
+      </div>
+
+      <!-- ══ ORDERS ══ -->
+      <div id="tab-orders" class="tab">
+        <div class="sh">
+          <div class="sh-title">🛒 Order Management</div>
+          <div class="sh-actions">
+            <button class="btn btn-out btn-sm" onclick="exportOrders()">📤 Export</button>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Receipt</th><th>Customer</th><th>Package</th><th>Amount</th><th>Date</th><th>Payment</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="orders-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══ PROMOTIONS ══ -->
+      <div id="tab-promo" class="tab">
+        <div class="sh"><div class="sh-title">📣 Promotion &amp; Messaging</div></div>
+        <div class="card">
+          <div class="card-title">Send Promotion to Customers</div>
+          <div class="fg">
+            <label>Target Audience</label>
+            <select id="promo-target" onchange="showSpecificCustomer(this.value)">
+              <option value="all">All Customers (48)</option>
+              <option value="active">Active Customers only</option>
+              <option value="pending">Pending Customers</option>
+              <option value="specific">Specific Customer</option>
+            </select>
+          </div>
+          <div class="fg" id="specific-cust-fg" style="display:none;">
+            <label>Select Customer</label>
+            <select id="promo-specific-cust"></select>
+          </div>
+          <div class="fg">
+            <label>Message Channel</label>
+            <div class="promo-options">
+              <div class="promo-chip selected" onclick="selectChannel(this,'email')"><div class="pc-icon">📧</div><div class="pc-label">Email</div><div class="pc-sub">Send via email</div></div>
+              <div class="promo-chip" onclick="selectChannel(this,'sms')"><div class="pc-icon">📱</div><div class="pc-label">SMS</div><div class="pc-sub">Text message</div></div>
+              <div class="promo-chip" onclick="selectChannel(this,'whatsapp')"><div class="pc-icon">💬</div><div class="pc-label">WhatsApp</div><div class="pc-sub">WhatsApp blast</div></div>
+              <div class="promo-chip" onclick="selectChannel(this,'all')"><div class="pc-icon">🚀</div><div class="pc-label">All Channels</div><div class="pc-sub">Email + SMS + WA</div></div>
+            </div>
+          </div>
+          <div class="fg"><label>Subject / Title</label><input type="text" id="promo-subject" placeholder="🎉 Exclusive Offer from NEXRA!"></div>
+          <div class="fg">
+            <label>Message</label>
+            <textarea id="promo-msg" placeholder="Dear [Customer Name],&#10;&#10;We have an exciting offer just for you!...&#10;&#10;Best regards,&#10;NEXRA Team"></textarea>
+          </div>
+          <div style="display:flex;gap:0.8rem;flex-wrap:wrap;">
+            <button class="btn btn-prim" onclick="sendPromo()">📤 Send Promotion</button>
+            <button class="btn btn-out btn-sm" onclick="insertVar('[Customer Name]')">Insert Name</button>
+            <button class="btn btn-out btn-sm" onclick="insertVar('[Package Name]')">Insert Package</button>
+            <button class="btn btn-out btn-sm" onclick="insertVar('[Renewal Date]')">Insert Date</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">📋 Promotion History</div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Date</th><th>Subject</th><th>Sent To</th><th>Channel</th><th>Status</th></tr></thead>
+              <tbody id="promo-history"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ RECEIPTS ══ -->
+      <div id="tab-receipts" class="tab">
+        <div class="sh"><div class="sh-title">🧾 Receipt Generator</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
+          <div class="card">
+            <div class="card-title">Generate Receipt</div>
+            <div class="fg">
+              <label>Customer</label>
+              <select id="rec-cust" onclick="populateRecCustomers()">
+                <option value="">Select customer...</option>
+              </select>
+            </div>
+            <div class="fg"><label>Service / Package</label><input type="text" id="rec-svc" placeholder="Professional Package"></div>
+            <div class="fg"><label>Amount</label><input type="text" id="rec-amt" placeholder="LKR 75,000"></div>
+            <div class="fg"><label>Date</label><input type="date" id="rec-date"></div>
+            <div class="fg">
+              <label>Payment Method</label>
+              <select id="rec-pay">
+                <option>Bank Transfer</option>
+                <option>Cash</option>
+                <option>Online Payment</option>
+                <option>Cheque</option>
+              </select>
+            </div>
+            <div class="fg"><label>Notes</label><textarea id="rec-notes" placeholder="Additional notes..." style="min-height:70px;"></textarea></div>
+            <div style="display:flex;gap:0.8rem;">
+              <button class="btn btn-prim" onclick="genReceipt()">🧾 Generate</button>
+              <button class="btn btn-out" onclick="printReceipt()">🖨️ Print</button>
+            </div>
+          </div>
+          <div>
+            <div class="receipt-preview" id="receipt-preview">
+              <div class="rp-logo">NEXRA</div>
+              <div class="rp-tag">Payment Receipt · Official</div>
+              <hr class="rp-divider">
+              <div class="rp-row"><span>Receipt #</span><span id="rp-id">NX-000001</span></div>
+              <div class="rp-row"><span>Customer</span><span id="rp-cust">–</span></div>
+              <div class="rp-row"><span>Service</span><span id="rp-svc">–</span></div>
+              <div class="rp-row"><span>Date</span><span id="rp-date">–</span></div>
+              <div class="rp-row"><span>Payment</span><span id="rp-pay">–</span></div>
+              <div class="rp-row"><span>Notes</span><span id="rp-notes" style="color:var(--muted);font-size:0.78rem;">–</span></div>
+              <hr class="rp-divider">
+              <div class="rp-row rp-total"><span>TOTAL AMOUNT</span><span id="rp-amt">–</span></div>
+              <div class="rp-row" style="margin-top:0.5rem;"><span>Status</span><span style="color:var(--green);font-weight:700;">✓ PAID</span></div>
+              <div class="rp-id">NEXRA Technology · athayiathayi43@gmail.com · 0784237705</div>
+              <div class="rp-id" style="margin-top:0.3rem;">Sri Lanka</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:1.5rem;">
+          <div class="card-title">📋 All Receipts</div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Receipt #</th><th>Customer</th><th>Service</th><th>Amount</th><th>Date</th><th>Actions</th></tr></thead>
+              <tbody id="all-receipts-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ ACCOUNTS ══ -->
+      <div id="tab-accounts" class="tab">
+        <div class="sh">
+          <div class="sh-title">🔑 Account Management</div>
+          <div class="sh-actions">
+            <button class="btn btn-prim btn-sm" onclick="openModal('add-admin-modal')">+ Create Admin</button>
+            <button class="btn btn-out btn-sm" onclick="openModal('add-account-modal')">+ Add Account</button>
+          </div>
+        </div>
+
+        <!-- Admin Accounts -->
+        <div class="card" style="margin-bottom:1.5rem;">
+          <div class="card-title">🔐 Admin Accounts</div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="admin-accounts-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Customer Sign-Up Accounts -->
+        <div class="card">
+          <div class="card-title">👥 Customer Accounts (Signed Up)</div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Service Interest</th><th>Joined</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="signup-accounts-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SETTINGS ══ -->
+      <div id="tab-settings" class="tab">
+        <div class="sh"><div class="sh-title">⚙️ System Settings</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+          <div class="card">
+            <div class="card-title">Company Information</div>
+            <div class="fg"><label>Company Name</label><input type="text" value="NEXRA Technology"></div>
+            <div class="fg"><label>Admin Email</label><input type="email" value="athayiathayi43@gmail.com"></div>
+            <div class="fg"><label>Phone</label><input type="tel" value="0784237705"></div>
+            <div class="fg"><label>Address</label><textarea style="min-height:70px;">Sri Lanka</textarea></div>
+            <button class="btn btn-prim btn-sm" onclick="toast('✅','Company info saved!')">Save Changes</button>
+          </div>
+          <div class="card">
+            <div class="card-title">Admin Security</div>
+            <div class="fg"><label>Current Password</label><input type="password" placeholder="••••••••"></div>
+            <div class="fg"><label>New Password</label><input type="password" placeholder="New password"></div>
+            <div class="fg"><label>Confirm Password</label><input type="password" placeholder="Confirm new password"></div>
+            <button class="btn btn-prim btn-sm" onclick="toast('✅','Password updated!')">Update Password</button>
+          </div>
+          <div class="card">
+            <div class="card-title">Notification Settings</div>
+            <div style="display:flex;flex-direction:column;gap:0.8rem;">
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:0.88rem;">Email on new order <input type="checkbox" checked></label>
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:0.88rem;">SMS on payment received <input type="checkbox" checked></label>
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:0.88rem;">Weekly summary report <input type="checkbox"></label>
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:0.88rem;">Low stock alerts <input type="checkbox" checked></label>
+            </div>
+            <button class="btn btn-prim btn-sm" style="margin-top:1rem;" onclick="toast('✅','Notification settings saved!')">Save</button>
+          </div>
+          <div class="card">
+            <div class="card-title">Data Management</div>
+            <div style="display:flex;flex-direction:column;gap:0.8rem;">
+              <button class="btn btn-out" onclick="exportCustomers()">📤 Export All Customers</button>
+              <button class="btn btn-out" onclick="exportOrders()">📤 Export All Orders</button>
+              <button class="btn btn-ghost" onclick="toast('💾','Backup created!')">💾 Backup Data</button>
+              <button class="btn btn-red btn-sm" onclick="if(confirm('Clear all data?')){toast('🗑️','Data cleared!')}">🗑️ Clear All Data</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /admin-app -->
+
+<!-- ═══════════════ MODALS ═══════════════ -->
+
+<!-- Add Customer -->
+<div class="modal-overlay" id="add-customer-modal">
+  <div class="modal-box">
+    <div class="modal-title">👥 Add New Customer</div>
+    <div class="fg"><label>Full Name</label><input type="text" id="nc-name" placeholder="Customer name"></div>
+    <div class="fg"><label>Email</label><input type="email" id="nc-email" placeholder="email@example.com"></div>
+    <div class="fg"><label>Phone</label><input type="tel" id="nc-phone" placeholder="07XXXXXXXX"></div>
+    <div class="fg"><label>Company</label><input type="text" id="nc-company" placeholder="Company (optional)"></div>
+    <div class="fg">
+      <label>Service / Package</label>
+      <select id="nc-service">
+        <option>Starter Package</option><option>Professional Package</option>
+        <option>Enterprise Package</option><option>POS System</option>
+        <option>Digital Marketing</option><option>Custom Software</option>
+      </select>
+    </div>
+    <div class="fg"><label>Amount (LKR)</label><input type="text" id="nc-amount" placeholder="75,000"></div>
+    <div class="fg">
+      <label>Status</label>
+      <select id="nc-status"><option value="Active">Active</option><option value="Pending">Pending</option><option value="Cancelled">Cancelled</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-prim" onclick="addCustomer()">✅ Add Customer</button>
+      <button class="btn btn-ghost" onclick="closeModal('add-customer-modal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Package -->
+<div class="modal-overlay" id="add-pkg-modal">
+  <div class="modal-box">
+    <div class="modal-title">📦 Add New Package</div>
+    <div class="fg"><label>Package Name</label><input type="text" id="np-name" placeholder="Package name"></div>
+    <div class="fg"><label>Price</label><input type="text" id="np-price" placeholder="LKR 50,000"></div>
+    <div class="fg"><label>Icon (emoji)</label><input type="text" id="np-icon" placeholder="📦" maxlength="4"></div>
+    <div class="fg"><label>Description</label><textarea id="np-desc" placeholder="Package description..."></textarea></div>
+    <div class="modal-actions">
+      <button class="btn btn-prim" onclick="addPackage()">✅ Add Package</button>
+      <button class="btn btn-ghost" onclick="closeModal('add-pkg-modal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Create Admin -->
+<div class="modal-overlay" id="add-admin-modal">
+  <div class="modal-box">
+    <div class="modal-title">🔐 Create Admin Account</div>
+    <div class="fg"><label>Full Name</label><input type="text" id="na-name" placeholder="Admin name"></div>
+    <div class="fg"><label>Email</label><input type="email" id="na-email" placeholder="admin@nexra.lk"></div>
+    <div class="fg">
+      <label>Role</label>
+      <select id="na-role"><option value="Admin">Admin</option><option value="Manager">Manager</option><option value="Super Admin">Super Admin</option></select>
+    </div>
+    <div class="fg"><label>Password</label><input type="password" id="na-pw" placeholder="Min 8 characters"><button class="pt" onclick="togglePt('na-pw',this)">👁️</button></div>
+    <div class="fg"><label>Confirm Password</label><input type="password" id="na-pw2" placeholder="Re-enter password"><button class="pt" onclick="togglePt('na-pw2',this)">👁️</button></div>
+    <div class="modal-actions">
+      <button class="btn btn-prim" onclick="createAdmin()">✅ Create Admin</button>
+      <button class="btn btn-ghost" onclick="closeModal('add-admin-modal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Customer Account -->
+<div class="modal-overlay" id="add-account-modal">
+  <div class="modal-box">
+    <div class="modal-title">👤 Add Customer Account</div>
+    <div class="fg"><label>Full Name</label><input type="text" id="acc-name" placeholder="Customer name"></div>
+    <div class="fg"><label>Email</label><input type="email" id="acc-email" placeholder="customer@email.com"></div>
+    <div class="fg"><label>Phone</label><input type="tel" id="acc-phone" placeholder="07XXXXXXXX"></div>
+    <div class="fg">
+      <label>Service Interest</label>
+      <select id="acc-service">
+        <option>Website Creation</option><option>Custom Software</option>
+        <option>POS System</option><option>Digital Marketing</option>
+        <option>Mobile App</option><option>AI &amp; Automation</option>
+        <option>Enterprise Package</option>
+      </select>
+    </div>
+    <div class="fg"><label>Set Password</label><input type="password" id="acc-pw" placeholder="Min 8 characters"><button class="pt" onclick="togglePt('acc-pw',this)">👁️</button></div>
+    <div class="modal-actions">
+      <button class="btn btn-prim" onclick="createAccount()">✅ Create Account</button>
+      <button class="btn btn-ghost" onclick="closeModal('add-account-modal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-c" id="toast-container"></div>
+
+<script src="admin-script.js"></script>
+</body>
+</html>

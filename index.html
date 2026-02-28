@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXRA – Defining The Next Generation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="NEXRA_Customer_style.css">
+<script src="NEXRA_Customer_script.js"></script>
+<link rel="icon" type="image/x-icon" href="nexra.png">
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-robot">
+    <svg width="150" height="175" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 0 18px rgba(255,215,0,0.4))">
+      <defs>
+        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a4dc2"/><stop offset="100%" stop-color="#0B3D91"/></linearGradient>
+        <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFD700"/><stop offset="100%" stop-color="#FFA500"/></linearGradient>
+      </defs>
+      <rect x="55" y="90" width="90" height="80" rx="10" fill="url(#g1)" stroke="#FFD700" stroke-width="1.5"/>
+      <rect x="65" y="45" width="70" height="55" rx="12" fill="url(#g1)" stroke="#FFD700" stroke-width="1.5"/>
+      <line x1="100" y1="45" x2="100" y2="25" stroke="#FFD700" stroke-width="2"/>
+      <circle cx="100" cy="20" r="5" fill="#FFD700"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/></circle>
+      <rect x="75" y="58" width="18" height="12" rx="3" fill="#FFD700"><animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/></rect>
+      <rect x="107" y="58" width="18" height="12" rx="3" fill="#FFD700"><animate attributeName="opacity" values="1;0.7;1" dur="2s" repeatCount="indefinite"/></rect>
+      <rect x="77" y="80" width="46" height="8" rx="4" fill="url(#g2)" opacity="0.6"/>
+      <rect x="20" y="92" width="30" height="55" rx="8" fill="url(#g1)" stroke="#FFD700" stroke-width="1.5"/>
+      <rect x="150" y="92" width="30" height="55" rx="8" fill="url(#g1)" stroke="#FFD700" stroke-width="1.5"/>
+      <rect x="18" y="143" width="34" height="20" rx="6" fill="url(#g2)"/>
+      <rect x="148" y="143" width="34" height="20" rx="6" fill="url(#g2)"/>
+      <rect x="63" y="168" width="30" height="45" rx="8" fill="url(#g1)" stroke="#FFD700" stroke-width="1.5"/>
+      <rect x="107" y="168" width="30" height="45" rx="8" fill="url(#g1)" stroke="#FFD700" stroke-width="1.5"/>
+      <rect x="58" y="208" width="40" height="12" rx="6" fill="url(#g2)"/>
+      <rect x="102" y="208" width="40" height="12" rx="6" fill="url(#g2)"/>
+    </svg>
+  </div>
+  <div class="ld-logo">NEXRA</div>
+  <div class="ld-bar-bg"><div class="ld-bar"></div></div>
+  <div class="ld-txt">INITIALIZING...</div>
+</div>
+
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="logo" onclick="gp('home')">NEXRA</div>
+  <ul class="nav-links">
+    <li><a id="nl-h" class="on" onclick="gp('home')">Home</a></li>
+    <li><a id="nl-p" onclick="gp('packages')">Packages</a></li>
+    <li><a id="nl-s" onclick="gp('services')">Services</a></li>
+    <li><a id="nl-d" onclick="gp('dashboard')">Dashboard</a></li>
+  </ul>
+  <div class="nav-r" id="nav-r">
+    <button class="btn btn-o" onclick="gp('signin')" id="nav-signin">Sign In</button>
+    <button class="btn btn-p" onclick="gp('signup')" id="nav-signup">Get Started</button>
+    <button class="btn btn-o" onclick="dologout()" id="nav-logout" style="display:none;">Sign Out</button>
+    <button class="btn btn-p" onclick="gp('dashboard')" id="nav-dash" style="display:none;">My Account</button>
+  </div>
+  <div class="hbg" onclick="tmob()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob" id="mob">
+  <a onclick="gp('home')">🏠 Home</a>
+  <a onclick="gp('packages')">📦 Packages</a>
+  <a onclick="gp('services')">⚙️ Services</a>
+  <a onclick="gp('dashboard')" id="mob-dash-link">📊 Dashboard</a>
+  <a onclick="gp('signin')" id="mob-signin">🔑 Sign In</a>
+  <a onclick="gp('signup')" id="mob-signup">✨ Get Started</a>
+  <a onclick="dologout()" id="mob-logout" style="display:none;">🚪 Sign Out</a>
+  <a onclick="gp('dashboard')" id="mob-dash" style="display:none;">📊 My Account</a>
+</div>
+
+<!-- ════════ HOME PAGE ════════ -->
+<div id="home" class="page active">
+  <div class="hero">
+    <div class="hero-badge">★ ESTD. 2026 – DEFINING THE NEXT GENERATION</div>
+    <h1 class="hero-title">
+      <span class="t1">THE FUTURE OF</span>
+      <span class="t2">NEXRA</span>
+    </h1>
+    <p class="hero-sub">Next-generation software solutions, POS systems, digital marketing, and AI services that drive your business into the digital frontier.</p>
+    <div class="hero-acts">
+      <button class="btn btn-p" onclick="gp('packages')" style="padding:1rem 2.5rem;">Explore Packages</button>
+      <button class="btn btn-o" onclick="gp('services')">Our Services</button>
+    </div>
+    <div class="hero-robot">
+      <svg width="150" height="175" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 0 22px rgba(255,215,0,0.35))">
+        <rect x="55" y="90" width="90" height="80" rx="10" fill="url(#g1)" stroke="#FFD700" stroke-width="1.5"/>
+        <rect x="65" y="45" width="70" height="55" rx="12" fill="url(#g1)" stroke="#FFD700" stroke-width="1.5"/>
+        <line x1="100" y1="45" x2="100" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <circle cx="100" cy="20" r="5" fill="#FFD700"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/></circle>
+        <rect x="75" y="58" width="18" height="12" rx="3" fill="#FFD700"><animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/></rect>
+        <rect x="107" y="58" width="18" height="12" rx="3" fill="#FFD700"><animate attributeName="opacity" values="1;0.7;1" dur="2s" repeatCount="indefinite"/></rect>
+        <rect x="77" y="80" width="46" height="8" rx="4" fill="url(#g2)" opacity="0.6"/>
+        <rect x="67" y="100" width="66" height="45" rx="6" fill="rgba(0,0,0,0.3)" stroke="rgba(255,215,0,0.25)" stroke-width="1"/>
+        <circle cx="84" cy="120" r="7" fill="none" stroke="#FFD700" stroke-width="2"><animate attributeName="r" values="5;9;5" dur="2s" repeatCount="indefinite"/></circle>
+        <circle cx="116" cy="120" r="7" fill="none" stroke="#FFD700" stroke-width="2"><animate attributeName="r" values="9;5;9" dur="2s" repeatCount="indefinite"/></circle>
+        <rect x="20" y="92" width="30" height="55" rx="8" fill="url(#g1)" stroke="#FFD700" stroke-width="1.5"/>
+        <rect x="150" y="92" width="30" height="55" rx="8" fill="url(#g1)" stroke="#FFD700" stroke-width="1.5"/>
+        <rect x="18" y="143" width="34" height="20" rx="6" fill="url(#g2)"/>
+        <rect x="148" y="143" width="34" height="20" rx="6" fill="url(#g2)"/>
+        <rect x="63" y="168" width="30" height="45" rx="8" fill="url(#g1)" stroke="#FFD700" stroke-width="1.5"/>
+        <rect x="107" y="168" width="30" height="45" rx="8" fill="url(#g1)" stroke="#FFD700" stroke-width="1.5"/>
+        <rect x="58" y="208" width="40" height="12" rx="6" fill="url(#g2)"/>
+        <rect x="102" y="208" width="40" height="12" rx="6" fill="url(#g2)"/>
+      </svg>
+    </div>
+    <div class="stats">
+      <div class="sc"><span class="sn" data-t="500">0</span><span class="sl">Clients Served</span></div>
+      <div class="sc"><span class="sn" data-t="99">0</span><span class="sl">% Uptime</span></div>
+      <div class="sc"><span class="sn" data-t="24">0</span><span class="sl">/7 Support</span></div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sec-lbl">What We Do</div>
+    <h2 class="sec-ttl">Premium Tech Solutions</h2>
+    <div class="sg">
+      <div class="scard"><span class="sic">🌐</span><div class="snm">Website Creation</div><p class="sds">Pixel-perfect websites with stunning UI/UX built for speed, SEO, and global scale.</p></div>
+      <div class="scard"><span class="sic">💻</span><div class="snm">Software Development</div><p class="sds">Custom software solutions tailored precisely to your business workflows and needs.</p></div>
+      <div class="scard"><span class="sic">🖥️</span><div class="snm">POS Systems</div><p class="sds">Smart point-of-sale solutions with inventory, reports, and real-time analytics.</p></div>
+      <div class="scard"><span class="sic">📣</span><div class="snm">Digital Marketing</div><p class="sds">Data-driven campaigns: SEO, social media, paid ads, and brand growth strategies.</p></div>
+      <div class="scard"><span class="sic">🤖</span><div class="snm">AI &amp; Automation</div><p class="sds">Deploy intelligent systems that learn, adapt, and automate business processes.</p></div>
+      <div class="scard"><span class="sic">📱</span><div class="snm">Mobile Apps</div><p class="sds">Native and cross-platform apps that delight users on iOS and Android worldwide.</p></div>
+    </div>
+  </div>
+  <footer>
+    <div class="flogo">NEXRA</div>
+    <p>Defining The Next Generation &middot; &copy; 2026 NEXRA Technology</p>
+    <div class="fl">
+      <a onclick="gp('packages')">Packages</a>
+      <a onclick="gp('services')">Services</a>
+      <a href="mailto:athayiathayi43@gmail.com">athayiathayi43@gmail.com</a>
+      <a href="tel:0784237705">0784237705</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ════════ PACKAGES PAGE ════════ -->
+<div id="packages" class="page">
+  <div class="ph">
+    <div class="ph-b">TRANSPARENT PRICING</div>
+    <div class="ph-t">Choose Your Package</div>
+    <p class="ph-s">All plans include 24/7 support, free consultation, and dedicated account management.</p>
+  </div>
+  <div class="sec" style="padding-top:2rem;">
+    <div class="pg">
+      <div class="pcard">
+        <span class="pic">🌱</span><div class="pnm">STARTER</div>
+        <div class="ppr">LKR 25,000<small>/one-time</small></div>
+        <p class="pds">Perfect for small businesses taking their first digital step.</p>
+        <ul class="pft"><li>5-Page Business Website</li><li>Mobile Responsive Design</li><li>Basic SEO Setup</li><li>Contact Form Integration</li><li>3 Months Support</li></ul>
+        <button class="btn btn-o" style="width:100%;" onclick="obuy('Starter Package','LKR 25,000')">Buy Now</button>
+      </div>
+      <div class="pcard hot">
+        <span class="pic">🚀</span><div class="pnm">PROFESSIONAL</div>
+        <div class="ppr">LKR 75,000<small>/one-time</small></div>
+        <p class="pds">Full-featured solution for growing businesses ready to scale.</p>
+        <ul class="pft"><li>Custom Web Application</li><li>POS System Integration</li><li>Digital Marketing (3 months)</li><li>Advanced SEO &amp; Analytics</li><li>CRM Dashboard</li><li>6 Months Priority Support</li></ul>
+        <button class="btn btn-p" style="width:100%;" onclick="obuy('Professional Package','LKR 75,000')">Buy Now</button>
+      </div>
+      <div class="pcard">
+        <span class="pic">🏆</span><div class="pnm">ENTERPRISE</div>
+        <div class="ppr">LKR 200,000+<small>/custom</small></div>
+        <p class="pds">End-to-end digital transformation for established enterprises.</p>
+        <ul class="pft"><li>Full Software Suite</li><li>AI &amp; Automation Integration</li><li>Multi-branch POS System</li><li>12 Month Marketing Plan</li><li>Dedicated Account Manager</li><li>Custom Mobile App</li></ul>
+        <button class="btn btn-o" style="width:100%;" onclick="obuy('Enterprise Package','LKR 200,000+')">Get Quote</button>
+      </div>
+      <div class="pcard">
+        <span class="pic">🖥️</span><div class="pnm">POS SYSTEM</div>
+        <div class="ppr">LKR 45,000<small>/one-time</small></div>
+        <p class="pds">Complete point-of-sale system for retail and restaurant businesses.</p>
+        <ul class="pft"><li>Touch-screen Interface</li><li>Inventory Management</li><li>Sales Reports &amp; Analytics</li><li>Multi-payment Support</li><li>Employee Management</li></ul>
+        <button class="btn btn-o" style="width:100%;" onclick="obuy('POS System','LKR 45,000')">Buy Now</button>
+      </div>
+      <div class="pcard">
+        <span class="pic">📣</span><div class="pnm">DIGITAL MARKETING</div>
+        <div class="ppr">LKR 15,000<small>/month</small></div>
+        <p class="pds">Drive growth with data-backed marketing campaigns across all channels.</p>
+        <ul class="pft"><li>Social Media Management</li><li>Google Ads Campaign</li><li>Monthly Analytics Report</li><li>Content Creation (8 posts)</li><li>Email Marketing</li></ul>
+        <button class="btn btn-o" style="width:100%;" onclick="obuy('Digital Marketing','LKR 15,000/mo')">Subscribe</button>
+      </div>
+      <div class="pcard">
+        <span class="pic">⚙️</span><div class="pnm">CUSTOM SOFTWARE</div>
+        <div class="ppr">Quote<small> based</small></div>
+        <p class="pds">Bespoke software engineered exactly to your specifications.</p>
+        <ul class="pft"><li>Requirements Analysis</li><li>Custom Development</li><li>Testing &amp; QA</li><li>Training &amp; Handover</li><li>Ongoing Maintenance</li></ul>
+        <button class="btn btn-o" style="width:100%;" onclick="obuy('Custom Software','Custom Quote')">Request Quote</button>
+      </div>
+    </div>
+  </div>
+  <footer><div class="flogo">NEXRA</div><p>Questions? <a href="mailto:athayiathayi43@gmail.com">athayiathayi43@gmail.com</a> &middot; 0784237705</p></footer>
+</div>
+
+<!-- ════════ SERVICES PAGE ════════ -->
+<div id="services" class="page">
+  <div class="ph">
+    <div class="ph-b">OUR SERVICES</div>
+    <div class="ph-t">What We Build For You</div>
+    <p class="ph-s">Comprehensive digital solutions tailored to every stage of your business journey.</p>
+  </div>
+  <div class="sec" style="padding-top:2rem;">
+    <div class="sg">
+      <div class="scard"><span class="sic">🌐</span><div class="snm">Website Creation</div><p class="sds">From landing pages to full e-commerce platforms — pixel-perfect, fast, and SEO-optimized. Built for global scale.</p></div>
+      <div class="scard"><span class="sic">💻</span><div class="snm">Custom Software</div><p class="sds">Tailor-made software that automates workflows, reduces errors, and scales with your business. From ERP to niche tools.</p></div>
+      <div class="scard"><span class="sic">🖥️</span><div class="snm">POS Systems</div><p class="sds">Complete POS with real-time inventory, sales analytics, employee management, and multi-payment support.</p></div>
+      <div class="scard"><span class="sic">📣</span><div class="snm">Digital Marketing</div><p class="sds">Data-driven campaigns across Google, Meta, TikTok, and LinkedIn. SEO, SEM, content creation and analytics.</p></div>
+      <div class="scard"><span class="sic">📱</span><div class="snm">Mobile Applications</div><p class="sds">Native iOS &amp; Android apps or cross-platform Flutter solutions. Beautiful design, smooth performance.</p></div>
+      <div class="scard"><span class="sic">🤖</span><div class="snm">AI &amp; Automation</div><p class="sds">Intelligent chatbots, predictive analytics, document processing, and workflow automation that saves hours daily.</p></div>
+      <div class="scard"><span class="sic">☁️</span><div class="snm">Cloud Solutions</div><p class="sds">AWS, GCP, Azure deployments with 99.9% uptime SLA, auto-scaling, and enterprise-grade security.</p></div>
+      <div class="scard"><span class="sic">🔐</span><div class="snm">Cybersecurity</div><p class="sds">Security audits, penetration testing, SSL, data encryption, and real-time threat monitoring.</p></div>
+      <div class="scard"><span class="sic">📊</span><div class="snm">Data &amp; Analytics</div><p class="sds">Transform raw data into actionable insights. Custom dashboards, BI reports, and predictive models.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:3rem;">
+      <button class="btn btn-p" onclick="gp('packages')" style="padding:1rem 2.5rem;">View Pricing Packages</button>
+    </div>
+  </div>
+  <footer><div class="flogo">NEXRA</div><p>&copy; 2026 NEXRA Technology &middot; Defining The Next Generation</p></footer>
+</div>
+
+<!-- ════════ SIGN IN ════════ -->
+<div id="signin" class="page">
+  <div class="ab">
+    <div class="al">NEXRA</div>
+    <div class="at">Defining The Next Generation</div>
+    <div class="ah">Welcome Back</div>
+    <div class="as">Sign in to your NEXRA account</div>
+    <div class="fg"><label>Email Address</label><input type="email" id="si-e" placeholder="you@email.com"></div>
+    <div class="fg"><label>Password</label><input type="password" id="si-p" placeholder="••••••••"><button class="eye" onclick="teye('si-p',this)">👁️</button></div>
+    <div class="rr"><label><input type="checkbox"> Remember me</label><a>Forgot password?</a></div>
+    <button class="btn btn-p btn-fw" onclick="dologin()" style="padding:1rem;">SIGN IN</button>
+    <button class="btn btn-g btn-fw" onclick="gp('home')" style="padding:0.9rem;">&larr; Back to Home</button>
+    <div class="asw">Don't have an account? <a onclick="gp('signup')">Create one &rarr;</a></div>
+  </div>
+</div>
+
+<!-- ════════ SIGN UP ════════ -->
+<div id="signup" class="page">
+  <div class="ab" style="max-width:520px;">
+    <div class="al">NEXRA</div>
+    <div class="at">Join The Next Generation</div>
+    <div class="ah">Create Account</div>
+    <div class="as">Start your NEXRA journey today</div>
+    <div class="row2">
+      <div class="fg"><label>First Name</label><input type="text" id="su-fn" placeholder="Ahmed"></div>
+      <div class="fg"><label>Last Name</label><input type="text" id="su-ln" placeholder="Athayi"></div>
+    </div>
+    <div class="fg"><label>Email Address</label><input type="email" id="su-em" placeholder="you@email.com"></div>
+    <div class="fg"><label>Phone Number</label><input type="tel" id="su-ph" placeholder="0784237705"></div>
+    <div class="fg"><label>Company</label><input type="text" id="su-co" placeholder="Your Company Name"></div>
+    <div class="fg"><label>Service Interest</label>
+      <select id="su-sv">
+        <option value="">Select a service...</option>
+        <option>Website Creation</option><option>Custom Software</option>
+        <option>POS System</option><option>Digital Marketing</option>
+        <option>Mobile App</option><option>AI &amp; Automation</option>
+        <option>Enterprise Package</option>
+      </select>
+    </div>
+    <div class="fg"><label>Password</label><input type="password" id="su-pw" placeholder="Min 8 characters"><button class="eye" onclick="teye('su-pw',this)">👁️</button></div>
+    <div class="fg"><label>Confirm Password</label><input type="password" id="su-pw2" placeholder="Re-enter password"><button class="eye" onclick="teye('su-pw2',this)">👁️</button></div>
+    <button class="btn btn-p btn-fw" onclick="dosignup()" style="padding:1rem;">CREATE ACCOUNT</button>
+    <button class="btn btn-g btn-fw" onclick="gp('home')" style="padding:0.9rem;">&larr; Back to Home</button>
+    <div class="asw">Already have an account? <a onclick="gp('signin')">Sign in &rarr;</a></div>
+  </div>
+</div>
+
+<!-- ════════ DASHBOARD ════════ -->
+<div id="dashboard" class="page">
+  <!-- Mobile dashboard nav (shown only on small screens) -->
+  <div class="mob-dash-nav" id="mob-dash-nav">
+    <div class="di on" onclick="dtab('ov',this)"><span>📊</span> Overview</div>
+    <div class="di" onclick="dtab('or',this)"><span>📦</span> Orders</div>
+    <div class="di" onclick="dtab('rc',this)"><span>🧾</span> Receipts</div>
+    <div class="di" onclick="dtab('pr',this)"><span>👤</span> Profile</div>
+    <div class="di" onclick="dologout()" style="color:#ff6b6b;"><span>🚪</span> Sign Out</div>
+  </div>
+  <div class="dw">
+    <!-- Sidebar (desktop) -->
+    <div class="ds">
+      <div class="dsl">My Account</div>
+      <div class="di on" onclick="dtab('ov',this)"><span>📊</span> Overview</div>
+      <div class="di" onclick="dtab('or',this)"><span>📦</span> My Orders</div>
+      <div class="di" onclick="dtab('rc',this)"><span>🧾</span> Receipts</div>
+      <div class="di" onclick="dtab('pr',this)"><span>👤</span> Profile</div>
+      <div style="margin-top:auto;padding-top:2rem;">
+        <div class="di" onclick="gp('home')"><span>&larr;</span> Back to Home</div>
+        <div class="di" onclick="dologout()" style="color:#ff6b6b;"><span>🚪</span> Sign Out</div>
+      </div>
+    </div>
+    <!-- Main content -->
+    <div class="dm">
+      <div id="dt-ov">
+        <div class="dht">Welcome back, Ahmed! 👋</div>
+        <div class="dhs">Here's your account overview</div>
+        <div class="dcg">
+          <div class="dc"><div class="dcl">Active Services</div><div class="dcv">2</div><div class="dcs">Running smoothly</div></div>
+          <div class="dc"><div class="dcl">Total Spent</div><div class="dcv" style="font-size:1.3rem;">LKR 120K</div><div class="dcs">Lifetime value</div></div>
+          <div class="dc"><div class="dcl">Support Tickets</div><div class="dcv">0</div><div class="dcs">All resolved</div></div>
+          <div class="dc"><div class="dcl">Next Renewal</div><div class="dcv" style="font-size:1rem;">Mar 2026</div><div class="dcs">Digital Marketing</div></div>
+        </div>
+        <div class="dst">Recent Orders</div>
+        <div class="ol">
+          <div class="oi"><div><div class="oin">Professional Package</div><div class="oid">Purchased: Jan 15, 2026</div></div><span class="bdg ba">Active</span></div>
+          <div class="oi"><div><div class="oin">Digital Marketing Monthly</div><div class="oid">Renewed: Feb 01, 2026</div></div><span class="bdg ba">Active</span></div>
+          <div class="oi"><div><div class="oin">POS System Setup</div><div class="oid">Completed: Dec 20, 2025</div></div><span class="bdg bd">Complete</span></div>
+        </div>
+      </div>
+      <div id="dt-or" style="display:none;">
+        <div class="dht">My Orders</div>
+        <div class="dhs">All your purchased packages</div>
+        <div class="ol">
+          <div class="oi" style="flex-direction:column;align-items:flex-start;gap:1rem;">
+            <div style="display:flex;justify-content:space-between;width:100%;"><div><div class="oin">Professional Package</div><div class="oid">Jan 15, 2026 · LKR 75,000</div></div><span class="bdg ba">Active</span></div>
+            <button class="btn btn-o" style="font-size:0.68rem;padding:0.4rem 1rem;" onclick="srec('Professional Package','LKR 75,000','Jan 15, 2026','NX-2026-001','Ahmed Athayi','Bank Transfer','')">🧾 View Receipt</button>
+          </div>
+          <div class="oi" style="flex-direction:column;align-items:flex-start;gap:1rem;">
+            <div style="display:flex;justify-content:space-between;width:100%;"><div><div class="oin">Digital Marketing Monthly</div><div class="oid">Feb 01, 2026 · LKR 15,000</div></div><span class="bdg ba">Active</span></div>
+            <button class="btn btn-o" style="font-size:0.68rem;padding:0.4rem 1rem;" onclick="srec('Digital Marketing Monthly','LKR 15,000','Feb 01, 2026','NX-2026-002','Ahmed Athayi','Bank Transfer','')">🧾 View Receipt</button>
+          </div>
+        </div>
+      </div>
+      <div id="dt-rc" style="display:none;">
+        <div class="dht">Receipts</div>
+        <div class="dhs">Your payment receipts</div>
+        <div class="ol">
+          <div class="oi"><div><div class="oin">Receipt #NX-2026-001</div><div class="oid">Professional Package · LKR 75,000</div></div><button class="btn btn-o" style="font-size:0.68rem;padding:0.4rem 1rem;" onclick="srec('Professional Package','LKR 75,000','Jan 15, 2026','NX-2026-001','Ahmed Athayi','Bank Transfer','')">View</button></div>
+          <div class="oi"><div><div class="oin">Receipt #NX-2026-002</div><div class="oid">Digital Marketing · LKR 15,000</div></div><button class="btn btn-o" style="font-size:0.68rem;padding:0.4rem 1rem;" onclick="srec('Digital Marketing Monthly','LKR 15,000','Feb 01, 2026','NX-2026-002','Ahmed Athayi','Bank Transfer','')">View</button></div>
+        </div>
+      </div>
+      <div id="dt-pr" style="display:none;">
+        <div class="dht">My Profile</div>
+        <div class="dhs">Manage your account information</div>
+        <div style="max-width:480px;">
+          <div class="fg"><label>Full Name</label><input type="text" id="pr-name" value="Ahmed Athayi"></div>
+          <div class="fg"><label>Email</label><input type="email" id="pr-email" value="athayiathayi43@gmail.com"></div>
+          <div class="fg"><label>Phone</label><input type="tel" value="0784237705"></div>
+          <div class="fg"><label>Company</label><input type="text" placeholder="Your company name"></div>
+          <button class="btn btn-p" onclick="toast('Profile updated successfully!','✅')" style="padding:0.8rem 2rem;">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ BUY MODAL ════════ -->
+<div class="mbg" id="m-buy">
+  <div class="mbox">
+    <div class="mlo">NEXRA</div>
+    <div class="mtg">Secure Checkout</div>
+    <div class="mpn" id="m-pname"></div>
+    <div class="mpp" id="m-pprice"></div>
+    <div class="fg"><label>Full Name</label><input type="text" id="by-n" placeholder="Your full name"></div>
+    <div class="fg"><label>Email</label><input type="email" id="by-e" placeholder="your@email.com"></div>
+    <div class="fg"><label>Phone</label><input type="tel" id="by-ph" placeholder="0784237705"></div>
+    <div class="fg"><label>Company (optional)</label><input type="text" id="by-co" placeholder="Your company"></div>
+    <div class="fg">
+      <label>Payment Method</label>
+      <select id="by-pay" onchange="togglePlanOpts()">
+        <option value="Bank Transfer">Bank Transfer</option>
+        <option value="Cash Payment">Cash Payment</option>
+        <option value="Online Payment">Online Payment</option>
+        <option value="Payment Plan">💳 Payment Plan (3 installments)</option>
+      </select>
+    </div>
+    <div id="plan-info" style="display:none;background:rgba(255,215,0,0.06);border:1px solid rgba(255,215,0,0.2);border-radius:10px;padding:1rem;margin-bottom:1rem;">
+      <div style="font-family:'Orbitron',sans-serif;font-size:0.72rem;color:var(--gold);letter-spacing:2px;margin-bottom:0.7rem;">PAYMENT PLAN DETAILS</div>
+      <div style="font-size:0.85rem;color:var(--muted);line-height:1.9;">
+        <div>📅 <strong style="color:var(--text);">Installment 1:</strong> <span id="plan-i1">–</span> — Due today</div>
+        <div>📅 <strong style="color:var(--text);">Installment 2:</strong> <span id="plan-i2">–</span> — Due in 30 days</div>
+        <div>📅 <strong style="color:var(--text);">Installment 3:</strong> <span id="plan-i3">–</span> — Due in 60 days</div>
+      </div>
+    </div>
+    <button class="btn btn-p btn-fw" onclick="dopurch()" style="padding:1rem;margin-top:0.5rem;">CONFIRM ORDER</button>
+    <button class="btn btn-g btn-fw" onclick="cm('m-buy')" style="padding:0.9rem;">Cancel</button>
+  </div>
+</div>
+
+<!-- ════════ RECEIPT MODAL ════════ -->
+<div class="mbg" id="m-rec">
+  <div class="mbox" style="max-width:500px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+      <div>
+        <div class="mlo" style="text-align:left;font-size:1.6rem;">NEXRA</div>
+        <div style="font-size:0.58rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-top:0.2rem;">Technology · Sri Lanka</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'Orbitron',sans-serif;font-size:0.65rem;color:var(--gold);letter-spacing:2px;">OFFICIAL RECEIPT</div>
+        <div id="r-id" style="font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--muted);margin-top:0.2rem;"></div>
+      </div>
+    </div>
+    <div style="height:2px;background:linear-gradient(90deg,#FFD700,#FFA500,transparent);border-radius:2px;margin-bottom:1.5rem;"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem;">
+      <div style="background:rgba(11,61,145,0.12);border-radius:10px;padding:1rem;">
+        <div style="font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;">Bill To</div>
+        <div id="r-cust" style="font-weight:700;font-size:0.92rem;"></div>
+      </div>
+      <div style="background:rgba(11,61,145,0.12);border-radius:10px;padding:1rem;">
+        <div style="font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;">Date Issued</div>
+        <div id="r-date" style="font-weight:700;font-size:0.92rem;"></div>
+      </div>
+    </div>
+    <div style="background:rgba(11,61,145,0.08);border:1px solid rgba(11,61,145,0.25);border-radius:10px;overflow:hidden;margin-bottom:1.2rem;">
+      <div style="padding:0.6rem 1rem;display:grid;grid-template-columns:1fr auto;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">
+        <span>Description</span><span>Amount</span>
+      </div>
+      <div style="padding:0.9rem 1rem;display:grid;grid-template-columns:1fr auto;align-items:center;">
+        <div>
+          <div id="r-svc" style="font-weight:700;font-size:0.92rem;"></div>
+          <div style="font-size:0.75rem;color:var(--muted);margin-top:0.2rem;">Professional service fee</div>
+        </div>
+        <div id="r-total-line" style="font-family:'Orbitron',sans-serif;font-size:0.95rem;color:var(--gold);"></div>
+      </div>
+    </div>
+    <div class="rrow"><span style="color:var(--muted);">Payment Method</span><span id="r-pay" style="font-weight:600;"></span></div>
+    <div class="rrow" id="r-plan-row" style="display:none;"><span style="color:var(--muted);">Payment Plan</span><span id="r-plan-txt" style="color:var(--gold);font-size:0.82rem;font-family:'Space Mono',monospace;"></span></div>
+    <div class="rrow"><span style="color:var(--muted);">Status</span><span style="color:#00C864;font-weight:700;">✓ CONFIRMED</span></div>
+    <hr class="rdv" style="margin:1rem 0;">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:0.8rem 1rem;background:rgba(255,215,0,0.06);border:1px solid rgba(255,215,0,0.18);border-radius:10px;margin-bottom:1.5rem;">
+      <span style="font-family:'Orbitron',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:2px;color:var(--muted);">TOTAL AMOUNT</span>
+      <span id="r-total" style="font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;color:var(--gold);"></span>
+    </div>
+    <div style="text-align:center;font-size:0.68rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem;">
+      NEXRA Technology · athayiathayi43@gmail.com · 0784237705<br>Sri Lanka
+    </div>
+    <div style="display:flex;gap:0.7rem;">
+      <button class="btn btn-p" onclick="window.print()" style="flex:1;padding:1rem;">🖨️ Print</button>
+      <button class="btn btn-g" onclick="cm('m-rec')" style="flex:1;padding:0.9rem;">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ AI CHAT ════════ -->
+<button class="cfab" onclick="tchat()" title="Chat with NEXRA AI">💬</button>
+<div class="cwin" id="cwin">
+  <div class="chdr">
+    <div class="cav">🤖</div>
+    <div>
+      <div class="can">NEXRA Support</div>
+      <div class="cst">Online – Ready to help</div>
+    </div>
+    <button class="cx" onclick="tchat()">✕</button>
+  </div>
+  <div class="cmsgs" id="cmsgs">
+    <div class="cmsg cma">👋 Hi! Welcome to NEXRA. I'm here to help with questions about our packages, services, or technical support. How can I assist you today?</div>
+  </div>
+  <div class="cinr">
+    <input type="text" id="cinp" placeholder="Type your message...">
+    <button class="csnd" onclick="smsg()">➤</button>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<div class="twrap" id="twrap"></div>
+
+
+</body>
+</html>
